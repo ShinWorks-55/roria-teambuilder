@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Roria Team Builder</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand__title">Roria Team Builder</div>
+      <div class="brand__sub">Showdown-style, offline saves</div>
+    </div>
+
+    <div class="topbar__actions">
+      <button id="newTeamBtn" class="btn btn--primary">+ New Team</button>
+      <button id="exportBtn" class="btn">Export</button>
+      <button id="importBtn" class="btn">Import</button>
+      <input id="importFile" type="file" accept="application/json" hidden />
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- LEFT: Teams -->
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <div class="sidebar__title">Teams</div>
+        <input id="teamSearch" class="input" placeholder="Search teams..." />
+      </div>
+
+      <div id="teamList" class="team-list"></div>
+    </aside>
+
+    <!-- CENTER: Team slots -->
+    <section class="content">
+      <div class="content__head">
+        <input id="teamName" class="input input--title" placeholder="Team name" />
+        <div class="pill-row">
+          <span id="formatPill" class="pill">Format: Custom</span>
+          <button id="saveTeamBtn" class="btn btn--accent">Save</button>
+          <button id="deleteTeamBtn" class="btn btn--danger">Delete</button>
+        </div>
+      </div>
+
+      <div id="slotGrid" class="slot-grid"></div>
+    </section>
+
+    <!-- RIGHT: Editor -->
+    <aside class="editor">
+      <div class="editor__head">
+        <div class="editor__title">Pokémon Editor</div>
+        <div id="editorHint" class="muted">Select a slot to edit.</div>
+      </div>
+
+      <div id="editorBody" class="editor__body hidden">
+        <div class="row">
+          <div class="sprite-box">
+            <img id="spriteImg" alt="sprite" />
+            <label class="switch">
+              <input id="shinyToggle" type="checkbox" />
+              <span class="switch__slider"></span>
+            </label>
+            <div class="switch__label">Shiny</div>
+          </div>
+
+          <div class="col grow">
+            <label class="label">Species</label>
+            <input id="speciesInput" class="input" placeholder="e.g., Ceruledge" />
+
+            <label class="label">Nickname</label>
+            <input id="nicknameInput" class="input" placeholder="optional" />
+
+            <div class="row gap">
+              <div class="col grow">
+                <label class="label">Ability</label>
+                <input id="abilityInput" class="input" placeholder="e.g., Flash Fire" />
+              </div>
+              <div class="col grow">
+                <label class="label">Nature</label>
+                <input id="natureInput" class="input" placeholder="e.g., Jolly" />
+              </div>
+            </div>
+
+            <label class="label">Item</label>
+            <input id="itemInput" class="input" placeholder="e.g., Leftovers" />
+          </div>
+        </div>
+
+        <div class="row gap">
+          <div class="col grow">
+            <label class="label">Move 1</label>
+            <input id="move1" class="input" placeholder="e.g., Shadow Ball" />
+          </div>
+          <div class="col grow">
+            <label class="label">Move 2</label>
+            <input id="move2" class="input" placeholder="e.g., Protect" />
+          </div>
+        </div>
+
+        <div class="row gap">
+          <div class="col grow">
+            <label class="label">Move 3</label>
+            <input id="move3" class="input" placeholder="e.g., Swords Dance" />
+          </div>
+          <div class="col grow">
+            <label class="label">Move 4</label>
+            <input id="move4" class="input" placeholder="e.g., Close Combat" />
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row gap">
+          <div class="col grow">
+            <div class="row between">
+              <div class="label">EVs</div>
+              <div class="muted" id="evTotal">Total: 0 / 510</div>
+            </div>
+
+            <div class="ev-grid">
+              <div class="ev-row"><span>HP</span><input id="evHP" type="number" min="0" max="252" class="input input--num" /></div>
+              <div class="ev-row"><span>Atk</span><input id="evAtk" type="number" min="0" max="252" class="input input--num" /></div>
+              <div class="ev-row"><span>Def</span><input id="evDef" type="number" min="0" max="252" class="input input--num" /></div>
+              <div class="ev-row"><span>SpA</span><input id="evSpA" type="number" min="0" max="252" class="input input--num" /></div>
+              <div class="ev-row"><span>SpD</span><input id="evSpD" type="number" min="0" max="252" class="input input--num" /></div>
+              <div class="ev-row"><span>Spe</span><input id="evSpe" type="number" min="0" max="252" class="input input--num" /></div>
+            </div>
+          </div>
+
+          <div class="col charts">
+            <div class="chart-card">
+              <div class="chart-title">EV Hex</div>
+              <canvas id="evHex" width="260" height="220"></canvas>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title">EV Bars</div>
+              <canvas id="evBars" width="260" height="220"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row between">
+          <button id="clearSlotBtn" class="btn btn--ghost">Clear Slot</button>
+          <button id="applyBtn" class="btn btn--primary">Apply to Slot</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer muted">
+    Saved locally in your browser (localStorage). Export JSON to move devices.
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
