@@ -10,7 +10,7 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand__title">Roria Team Builder</div>
-      <div class="brand__sub">Showdown-style, offline saves</div>
+      <div class="brand__sub">Showdown-style builder · local saves · export/import</div>
     </div>
 
     <div class="topbar__actions">
@@ -28,7 +28,6 @@
         <div class="sidebar__title">Teams</div>
         <input id="teamSearch" class="input" placeholder="Search teams..." />
       </div>
-
       <div id="teamList" class="team-list"></div>
     </aside>
 
@@ -37,13 +36,29 @@
       <div class="content__head">
         <input id="teamName" class="input input--title" placeholder="Team name" />
         <div class="pill-row">
-          <span id="formatPill" class="pill">Format: Custom</span>
+          <span id="formatPill" class="pill">Format: Gen 9 OU</span>
+          <select id="formatSelect" class="select">
+            <option value="gen9ou">Gen 9 OU</option>
+            <option value="gen9uu">Gen 9 UU</option>
+            <option value="gen9ubers">Gen 9 Ubers</option>
+            <option value="gen9anythinggoes">Gen 9 Anything Goes</option>
+          </select>
           <button id="saveTeamBtn" class="btn btn--accent">Save</button>
           <button id="deleteTeamBtn" class="btn btn--danger">Delete</button>
         </div>
       </div>
 
       <div id="slotGrid" class="slot-grid"></div>
+
+      <!-- Evaluation -->
+      <div class="eval-wrap">
+        <div class="eval-head">
+          <div class="eval-title">Team Evaluation (data-driven)</div>
+          <button id="toggleEvalBtn" class="btn btn--ghost">Hide evaluation</button>
+        </div>
+        <div class="divider"></div>
+        <div id="evalBody" class="eval-body"></div>
+      </div>
     </section>
 
     <!-- RIGHT: Editor -->
@@ -66,7 +81,7 @@
 
           <div class="col grow">
             <label class="label">Species</label>
-            <input id="speciesInput" class="input" placeholder="e.g., Ceruledge" />
+            <input id="speciesInput" class="input" list="dl-species" placeholder="e.g., Ceruledge" />
 
             <label class="label">Nickname</label>
             <input id="nicknameInput" class="input" placeholder="optional" />
@@ -74,38 +89,38 @@
             <div class="row gap">
               <div class="col grow">
                 <label class="label">Ability</label>
-                <input id="abilityInput" class="input" placeholder="e.g., Flash Fire" />
+                <input id="abilityInput" class="input" list="dl-abilities" placeholder="e.g., Flash Fire" />
               </div>
               <div class="col grow">
                 <label class="label">Nature</label>
-                <input id="natureInput" class="input" placeholder="e.g., Jolly" />
+                <input id="natureInput" class="input" list="dl-natures" placeholder="e.g., Jolly" />
               </div>
             </div>
 
             <label class="label">Item</label>
-            <input id="itemInput" class="input" placeholder="e.g., Leftovers" />
+            <input id="itemInput" class="input" list="dl-items" placeholder="e.g., Leftovers" />
           </div>
         </div>
 
         <div class="row gap">
           <div class="col grow">
             <label class="label">Move 1</label>
-            <input id="move1" class="input" placeholder="e.g., Shadow Ball" />
+            <input id="move1" class="input" list="dl-moves" placeholder="e.g., Shadow Ball" />
           </div>
           <div class="col grow">
             <label class="label">Move 2</label>
-            <input id="move2" class="input" placeholder="e.g., Protect" />
+            <input id="move2" class="input" list="dl-moves" placeholder="e.g., Protect" />
           </div>
         </div>
 
         <div class="row gap">
           <div class="col grow">
             <label class="label">Move 3</label>
-            <input id="move3" class="input" placeholder="e.g., Swords Dance" />
+            <input id="move3" class="input" list="dl-moves" placeholder="e.g., Swords Dance" />
           </div>
           <div class="col grow">
             <label class="label">Move 4</label>
-            <input id="move4" class="input" placeholder="e.g., Close Combat" />
+            <input id="move4" class="input" list="dl-moves" placeholder="e.g., Close Combat" />
           </div>
         </div>
 
@@ -153,6 +168,13 @@
   <footer class="footer muted">
     Saved locally in your browser (localStorage). Export JSON to move devices.
   </footer>
+
+  <!-- Autocomplete lists -->
+  <datalist id="dl-species"></datalist>
+  <datalist id="dl-items"></datalist>
+  <datalist id="dl-abilities"></datalist>
+  <datalist id="dl-moves"></datalist>
+  <datalist id="dl-natures"></datalist>
 
   <script src="./app.js"></script>
 </body>
