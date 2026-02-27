@@ -403,13 +403,13 @@ function updateEVDisplays() {
 }
 
 function prettyFormat(formatId) {
-  const m = {
-    gen9ou: "Gen 9 OU",
-    gen9uu: "Gen 9 UU",
-    gen9ubers: "Gen 9 Ubers",
-    gen9anythinggoes: "Gen 9 Anything Goes",
-  };
-  return m[formatId] || formatId;
+  return formatId
+    .replace("gen", "Gen ")
+    .replace("anythinggoes", "Anything Goes")
+    .replace("ou", "OU")
+    .replace("uu", "UU")
+    .replace("ubers", "Ubers")
+    .trim();
 }
 
 /** ---------- Charts ---------- */
